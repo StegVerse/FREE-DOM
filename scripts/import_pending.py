@@ -1,11 +1,3 @@
-"""
-Merge any data/pending_updates_*.csv files into data/master_timeline.csv,
-deduplicate by (date, location, event), lightly normalize fields, sort,
-and archive the processed pending files.
-
-Safe to re-run; no side effects if no pending files exist.
-"""
-
 from __future__ import annotations
 import csv
 import pathlib
@@ -14,11 +6,15 @@ from datetime import datetime
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 ARCHIVE = DATA / "archive"
-MASTER = DATA / "master_timeline.csv"
 
-REQUIRED_HEADERS = [
-    "date","location","event","participants_on_record","source_urls","notes"
-]
+MASTER = DATA / "master_timeline.csv"
+PEOPLE = DATA / "verified_people_events.csv"
+
+REQ_MASTER = ["date","location","event","participants_on_record","source_urls","notes"]
+OPT_MASTER = ["deep_search_event","deep_search_notes"]  # new
+ALL_MASTER = REQ_MASTER + OPT_MASTER
+
+REQ_PEOPLE = ["date","location","event","person","role","source_urls","deep_search_person","deep_search_notes"]
 
 def read_csv(path: pathlib.Path) -> list[dict]:
     with path.open(newline="", encoding="utf-8") as f:
@@ -30,106 +26,116 @@ def write_csv(path: pathlib.Path, rows: list[dict], headers: list[str]) -> None:
         w = csv.DictWriter(f, fieldnames=headers)
         w.writeheader()
         for r in rows:
-            w.writerow(r)
+            w.writerow({h: r.get(h,"") for h in headers})
 
-def load_master() -> list[dict]:
-    if not MASTER.exists():
-        # create an empty master with headers
-        write_csv(MASTER, [], REQUIRED_HEADERS)
-        return []
-    rows = read_csv(MASTER)
-    # If headers missing, raise loudly
-    if rows and any(h not in rows[0].keys() for h in REQUIRED_HEADERS):
-        raise SystemExit("master_timeline.csv missing required headers")
-    return rows
+def ensure_file(path: pathlib.Path, headers: list[str]) -> None:
+    if not path.exists():
+        write_csv(path, [], headers)
 
-def normalize_row(r: dict) -> dict:
-    """Trim whitespace and normalize basic fields; keep data as-is otherwise."""
+def normalize_master_row(r: dict) -> dict:
     out = {}
-    for k in REQUIRED_HEADERS:
-        v = (r.get(k, "") or "").strip()
-        # collapse internal whitespace in some fields
+    for k in ALL_MASTER:
+        v = (r.get(k,"") or "").strip()
         if k in ("location","event"):
             v = " ".join(v.split())
         out[k] = v
+    # default deep search state if missing
+    if not out.get("deep_search_event"):
+        out["deep_search_event"] = "pending"
     return out
 
-def compose_key(r: dict) -> tuple:
-    # Key used for deduping. We deliberately ignore notes/sources differences.
+def key_master(r: dict) -> tuple:
     return (r.get("date","").strip(), r.get("location","").strip(), r.get("event","").strip())
 
 def parse_date_key(d: str) -> tuple:
-    """
-    Return a sortable key for 'date' that tolerates:
-      - YYYY-MM-DD
-      - YYYY-MM
-      - YYYY
-      - ranges like '2019-07-20–2019-08-20' (use start)
-    Non-parsable values sort last, preserving original string for stability.
-    """
     if "–" in d:
-        d = d.split("–", 1)[0].strip()
-
-    for fmt in ("%Y-%m-%d", "%Y-%m", "%Y"):
+        d = d.split("–",1)[0].strip()
+    for fmt in ("%Y-%m-%d","%Y-%m","%Y"):
         try:
             dt = datetime.strptime(d, fmt)
             return (0, dt.year, dt.month if fmt != "%Y" else 1, dt.day if fmt == "%Y-%m-%d" else 1, d)
         except ValueError:
-            continue
+            pass
     return (1, 9999, 12, 31, d or "~")
 
-def merge_rows(master: list[dict], pendings: list[list[dict]]) -> list[dict]:
-    merged = []
-    seen = set()
-    # seed with master
-    for r in master:
-        nr = normalize_row(r)
-        k = compose_key(nr)
+def merge_master():
+    ensure_file(MASTER, ALL_MASTER)
+    master_rows = read_csv(MASTER)
+    merged, seen = [], set()
+    for r in master_rows:
+        # Backfill new columns for legacy rows
+        for k in OPT_MASTER:
+            r.setdefault(k, "")
+        nr = normalize_master_row(r)
+        k = key_master(nr)
         if k not in seen:
             merged.append(nr); seen.add(k)
 
-    # add pendings
-    for chunk in pendings:
-        # basic header check
-        if not chunk:
-            continue
-        if any(h not in chunk[0].keys() for h in REQUIRED_HEADERS):
-            raise SystemExit("A pending_updates file is missing required headers")
+    for p in sorted(DATA.glob("pending_updates_*.csv")):
+        chunk = read_csv(p)
+        if not chunk: continue
+        # Fill missing new columns
         for r in chunk:
-            nr = normalize_row(r)
-            k = compose_key(nr)
+            for k in OPT_MASTER:
+                r.setdefault(k, "")
+            nr = normalize_master_row(r)
+            k = key_master(nr)
             if k not in seen:
                 merged.append(nr); seen.add(k)
 
-    # sort by parsed date, then location, then event
     merged.sort(key=lambda r: (parse_date_key(r["date"]), r["location"].lower(), r["event"].lower()))
-    return merged
+    write_csv(MASTER, merged, ALL_MASTER)
+
+    ts = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    for p in sorted(DATA.glob("pending_updates_*.csv")):
+        (ARCHIVE / f"{p.stem}.processed_{ts}.csv").parent.mkdir(parents=True, exist_ok=True)
+        p.replace(ARCHIVE / f"{p.stem}.processed_{ts}.csv")
+
+def key_people(r: dict) -> tuple:
+    return (r.get("date","").strip(), r.get("location","").strip(), r.get("event","").strip(), r.get("person","").strip())
+
+def normalize_people_row(r: dict) -> dict:
+    out = {}
+    for k in REQ_PEOPLE:
+        out[k] = (r.get(k,"") or "").strip()
+    if not out.get("deep_search_person"):
+        out["deep_search_person"] = "pending"
+    return out
+
+def merge_people():
+    ensure_file(PEOPLE, REQ_PEOPLE)
+    existing = read_csv(PEOPLE)
+    merged, seen = [], set()
+    for r in existing:
+        nr = normalize_people_row(r)
+        k = key_people(nr)
+        if k not in seen:
+            merged.append(nr); seen.add(k)
+
+    for p in sorted(DATA.glob("pending_people_*.csv")):
+        chunk = read_csv(p)
+        if not chunk: continue
+        if any(h not in chunk[0].keys() for h in REQ_PEOPLE):
+            raise SystemExit(f"{p.name} missing required headers")
+        for r in chunk:
+            nr = normalize_people_row(r)
+            k = key_people(nr)
+            if k not in seen:
+                merged.append(nr); seen.add(k)
+
+    merged.sort(key=lambda r: (parse_date_key(r["date"]), r["location"].lower(), r["event"].lower(), r["person"].lower()))
+    write_csv(PEOPLE, merged, REQ_PEOPLE)
+
+    ts = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    for p in sorted(DATA.glob("pending_people_*.csv")):
+        (ARCHIVE / f"{p.stem}.processed_{ts}.csv").parent.mkdir(parents=True, exist_ok=True)
+        p.replace(ARCHIVE / f"{p.stem}.processed_{ts}.csv")
 
 def main():
     ARCHIVE.mkdir(parents=True, exist_ok=True)
-    master_rows = load_master()
-
-    pending_paths = sorted(DATA.glob("pending_updates_*.csv"))
-    if not pending_paths:
-        print("No pending update files found; nothing to do.")
-        return
-
-    pending_batches = [ read_csv(p) for p in pending_paths ]
-    new_master = merge_rows(master_rows, pending_batches)
-
-    # Only write if changed
-    if new_master != master_rows:
-        write_csv(MASTER, new_master, REQUIRED_HEADERS)
-        print(f"Updated {MASTER} with {len(new_master)} rows.")
-    else:
-        print("No changes after merge (all rows were duplicates).")
-
-    # Archive pending files with timestamp
-    ts = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
-    for p in pending_paths:
-        archived = ARCHIVE / f"{p.stem}.processed_{ts}.csv"
-        p.replace(archived)
-        print(f"Archived {p.name} -> {archived.name}")
+    merge_master()
+    merge_people()
+    print("Merged pending updates and people successfully.")
 
 if __name__ == "__main__":
     main()
