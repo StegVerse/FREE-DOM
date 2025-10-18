@@ -1,4 +1,4 @@
-date,location,event,participants_on_record,source_urls,notes
+date,location,event,participants_on_record,source_urls,notes,deep_search_event,deep_search_notes
 1992-07-01,Palm Beach FL (Mar-a-Lago),Private club party captured on NBC archival video,Donald Trump; Jeffrey Epstein,https://www.nbcnews.com/video/archives-trump-and-epstein-at-1992-party-1595387587925,Video shows presence only; no allegations made.
 1992-11-15,Palm Beach FL,Additional NBC archive reporting on 1992 Mar-a-Lago party footage,NBC News (archival); Donald Trump; Jeffrey Epstein,https://www.nbcnews.com/video/archives-trump-and-epstein-at-1992-party-1595387587925,Secondary anchor noting presence on tape; corroborative reference.
 1996-09-01,New York NY,Media references to Epstein philanthropy and science patronage (pre-2000),Jeffrey Epstein (subject),https://www.nytimes.com/2002/08/01/business/financier-jeffrey-epstein-philanthropist-with-a-passion-for-science.html,Early public-profile context.
@@ -78,3 +78,4 @@ date,location,event,participants_on_record,source_urls,notes
 2025-10-03,Washington DC,Press coverage of committee obtaining additional calendars/call logs,U.S. House Oversight; press,https://www.washingtonpost.com/politics/,Batch coverage anchor; use with committee primary links.
 2025-10-17,Washington DC,Additional batch incl. Acosta interview transcript; new calendars/logs,House Oversight; Alex Acosta,https://www.washingtonpost.com/politics/2025/10/17/house-epstein-files/,Coverage with links to primary committee pages.
 2025-10-17,Washington DC,Additional committee release (transcripts/calendars/call logs incl. Acosta interview),U.S. House Oversight; Alex Acosta (interview),https://www.washingtonpost.com/politics/2025/10/17/house-epstein-files/,Batch coverage anchor (with primary links from committee site).
+
