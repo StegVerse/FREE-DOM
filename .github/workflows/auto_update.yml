@@ -1,0 +1,41 @@
+name: Validate & Summarize Timeline
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "README.md"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas
+
+      - name: Run checks
+        run: |
+          python scripts/update_timeline.py
+
+      - name: Print head of CSVs
+        run: |
+          echo "::group::master_timeline head"
+          head -n 20 data/master_timeline.csv
+          echo "::endgroup::"
+          echo "::group::photo_video_anchors head"
+          head -n 20 data/photo_video_anchors.csv
+          echo "::endgroup::"
+          echo "::group::organizations head"
+          head -n 20 data/organizations.csv
+          echo "::endgroup::"
