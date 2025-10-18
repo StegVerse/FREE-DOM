@@ -14,3 +14,16 @@ The purpose is documentation and analysis of systemic moral collapse
 across legal, political, and cultural institutions.
 
 https://github.com/StegVerse/FREE-DOM
+
+.
+├── README.md
+├── data/
+│   ├── master_timeline.csv
+│   ├── photo_video_anchors.csv
+│   ├── organizations.csv
+│   └── sources_index.md
+├── scripts/
+│   └── update_timeline.py
+└── .github/
+    └── workflows/
+        └── auto_update.yml
