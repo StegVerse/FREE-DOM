@@ -4,70 +4,53 @@ from datetime import datetime
 root = pathlib.Path(__file__).resolve().parents[1]
 data_dir = root / "data"
 
-required_mt_headers = [
-    "date","location","event","participants_on_record","source_urls","notes"
+master_headers = [
+    "date","location","event","participants_on_record","source_urls","notes",
+    "deep_search_event","deep_search_notes"
 ]
-required_ph_headers = [
-    "date","place","media_type","what_is_documented","people_on_record","source_urls","scene_notes"
-]
-required_org_headers = [
-    "entity_name","type","jurisdiction","identifier_or_ein","founded","active_years","public_sources","notes"
+people_headers = [
+    "date","location","event","person","role","source_urls","deep_search_person","deep_search_notes"
 ]
 
 def read_csv(path):
     with open(path, newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
-def check_headers(rows, required):
+def check_headers(rows, required, name):
+    if not rows:
+        print(f"::warning ::{name} is empty")
+        return
     missing = [h for h in required if h not in rows[0].keys()]
     if missing:
-        print(f"::error ::Missing headers in {required}: {missing}")
+        print(f"::error ::{name} missing headers: {missing}")
         sys.exit(1)
 
-def check_dates(rows, field):
+def check_dates(rows, field, name):
     for i, r in enumerate(rows, start=2):
-        val = r.get(field, "").strip()
+        val = (r.get(field,"") or "").strip()
         if not val:
-            print(f"::warning ::Row {i} has empty {field}")
+            print(f"::warning ::{name} row {i} has empty {field}")
             continue
-        # Allow ranges like 2019-07-20–2019-08-20 or year-only YYYY
         if "–" in val or "-" not in val:
             continue
-        try:
-            datetime.strptime(val, "%Y-%m-%d")
-        except ValueError:
-            # Allow YYYY-MM or YYYY only
+        for fmt in ("%Y-%m-%d","%Y-%m","%Y"):
             try:
-                datetime.strptime(val, "%Y-%m")
+                datetime.strptime(val, fmt)
+                break
             except ValueError:
-                try:
-                    datetime.strptime(val, "%Y")
-                except ValueError:
-                    print(f"::warning ::Row {i} has non-standard date: {val}")
-
-def summarize(rows, label):
-    print(f"{label}: {len(rows)} rows")
-    # Count unique places/locations quick glance
-    key = "location" if "location" in rows[0] else ("place" if "place" in rows[0] else None)
-    if key:
-        uniq = len(set(r[key] for r in rows))
-        print(f"{label}: {uniq} unique {key}")
+                pass
 
 def main():
     mt = read_csv(data_dir / "master_timeline.csv")
-    ph = read_csv(data_dir / "photo_video_anchors.csv")
-    org = read_csv(data_dir / "organizations.csv")
+    check_headers(mt, master_headers, "master_timeline.csv")
+    check_dates(mt, "date", "master_timeline.csv")
 
-    check_headers(mt, required_mt_headers)
-    check_headers(ph, required_ph_headers)
-    check_headers(org, required_org_headers)
+    pe = read_csv(data_dir / "verified_people_events.csv")
+    check_headers(pe, people_headers, "verified_people_events.csv")
+    check_dates(pe, "date", "verified_people_events.csv")
 
-    check_dates(mt, "date")
-    check_dates(ph, "date")
-
-    summarize(mt, "master_timeline")
-    summarize(ph, "photo_video_anchors")
-    summarize(org, "organizations")
+    print(f"master_timeline rows: {len(mt)}")
+    print(f"verified_people_events rows: {len(pe)}")
 
 if __name__ == "__main__":
     main()
