@@ -1,5 +1,7 @@
 # FREE-DOM: Factually Recounting Epstein’s Era – Deconstruction of Morality
 
+https://github.com/StegVerse/FREE-DOM
+
 **FREE-DOM** is an open-source factual archive reconstructing the verified
 timeline, documents, and organizational ecosystem of the Epstein era (1990–2025).
 
@@ -13,17 +15,10 @@ No speculation or unverified claims appear in this repository.
 The purpose is documentation and analysis of systemic moral collapse
 across legal, political, and cultural institutions.
 
-https://github.com/StegVerse/FREE-DOM
+## Contributing
+- Add only events with **clear public documentation**.
+- Include at least one **source URL** per row (prefer primary sources).
+- Keep descriptions neutral and factual.
 
-.
-├── README.md
-├── data/
-│   ├── master_timeline.csv
-│   ├── photo_video_anchors.csv
-│   ├── organizations.csv
-│   └── sources_index.md
-├── scripts/
-│   └── update_timeline.py
-└── .github/
-    └── workflows/
-        └── auto_update.yml
+## License
+MIT
