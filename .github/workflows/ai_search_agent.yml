@@ -1,0 +1,54 @@
+name: AI Search Agent (Public OSINT Sweep)
+
+on:
+  schedule:
+    - cron: "30 10 * * *"   # daily 10:30 UTC
+  workflow_dispatch: {}
+  push:
+    branches: [ "main" ]
+    paths:
+      - "scripts/search_agent.py"
+      - "data/sources_whitelist.csv"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas beautifulsoup4 feedparser requests
+
+      - name: Run AI Search Agent
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/search_agent.py
+
+      - name: Commit or PR (if changed)
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: |
+            data/unverified_events.csv
+            data/unverified_people.csv
+            data/unverified_connections.csv
+            data/master_timeline.csv
+            data/verified_people_events.csv
+            data/ai_agent_logs/
+          message: "chore(ai-agent): update CSVs with public-source leads"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
