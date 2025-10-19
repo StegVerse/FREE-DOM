@@ -38,6 +38,20 @@ jobs:
         run: |
           python scripts/build_checklist.py
 
+      - name: Build changelog
+        run: |
+          python scripts/build_changelog.py
+
+      - name: Commit changelog (if changed)
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: |
+            CHANGELOG.md
+            data/CHANGELOG_batches.csv
+          message: "docs: auto-rebuild CHANGELOG"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Commit changes (if any)
         uses: EndBug/add-and-commit@v9
         with:
