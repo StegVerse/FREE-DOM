@@ -1,0 +1,20 @@
+filename,category,mode,coverage,status,merge_state,notes,checklist_state
+pending_people_01.csv,people,static,verified participants,complete,merge-ready,none,✅ merged when committed
+pending_people_02.csv,people,static,expanded SDNY + media,complete,merge-ready,none,✅ merged when committed
+pending_people_03.csv,people,static,House Oversight + NGO,complete,merge-ready,none,✅ merged when committed
+pending_people_04.csv,people,static,International media + NGO,complete,merge-ready,none,✅ merged when committed
+pending_updates_07.csv,events,dynamic,Sept–Oct 2025 follow‑ups,complete,merge-ready,none,✅ merged when committed
+pending_updates_08.csv,events,dynamic,C‑SPAN IDs + Committee permalinks,complete,merge-ready,none,✅ merged when committed
+pending_updates_09.csv,events,dynamic,Jan 2024 unsealing wave (ECF 1315–1320),complete,merge-ready,none,✅ merged when committed
+pending_updates_10.csv,events,dynamic,Struck ECF 1320‑13 → 1320‑40,complete,merge-ready,none,✅ merged when committed
+pending_updates_11.csv,events,dynamic,ECF 1321–1325,complete,merge-ready,none,✅ merged when committed
+pending_updates_12.csv,events,dynamic,ECF 1326–1330,complete,merge-ready,none,✅ merged when committed
+pending_updates_13.csv,events,dynamic,ECF 1331–1400,complete,merge-ready,none,✅ merged when committed
+pending_updates_14.csv,events,dynamic,ECF 1401–1500,complete,merge-ready,none,✅ merged when committed
+pending_updates_15.csv,events,dynamic,ECF 1501–1600,complete,merge-ready,none,✅ merged when committed
+pending_updates_16.csv,events,dynamic,ECF 1601–1700,complete,merge-ready,none,✅ merged when committed
+pending_updates_17.csv,events,dynamic,ECF 1701–1800,complete,merge-ready,none,✅ merged when committed
+pending_updates_18.csv,events,dynamic,ECF 1801–1900,complete,merge-ready,none,✅ merged when committed
+pending_updates_19.csv,events,dynamic,ECF 1901–2000,complete,merge-ready,none,✅ merged when committed
+pending_updates_20.csv,events,dynamic,ECF 2001–2100,complete,merge-ready,none,✅ merged when committed
+pending_updates_21.csv,events,dynamic,ECF 2101–2300 (overflow),complete,merge-ready,none,✅ merged when committed
