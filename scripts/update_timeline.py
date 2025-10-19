@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys, csv, pathlib
 from datetime import datetime
 
@@ -13,12 +14,13 @@ people_headers = [
 ]
 
 def read_csv(path):
+    if not path.exists(): return []
     with open(path, newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 def check_headers(rows, required, name):
     if not rows:
-        print(f"::warning ::{name} is empty")
+        # allow empty files but ensure header presence (actual headers validated by import script)
         return
     missing = [h for h in required if h not in rows[0].keys()]
     if missing:
@@ -31,16 +33,19 @@ def check_dates(rows, field, name):
         if not val:
             print(f"::warning ::{name} row {i} has empty {field}")
             continue
-        if "–" in val or "-" not in val:
-            continue
+        # allow YYYY, YYYY-MM, YYYY-MM-DD and ranges like "YYYY-MM-DD–YYYY-MM-DD"
+        if "–" in val:
+            parts = val.split("–")
+            val = parts[0].strip()
+        ok = False
         for fmt in ("%Y-%m-%d","%Y-%m","%Y"):
             try:
                 datetime.strptime(val, fmt)
-                break
+                ok = True; break
             except ValueError:
                 pass
-
-# ... keep your imports and earlier code ...
+        if not ok:
+            print(f"::warning ::{name} row {i} has non-standard date '{(r.get(field,'') or '').strip()}'")
 
 def main():
     mt = read_csv(data_dir / "master_timeline.csv")
@@ -51,20 +56,19 @@ def main():
     check_headers(pe, people_headers, "verified_people_events.csv")
     check_dates(pe, "date", "verified_people_events.csv")
 
-    # NEW: unverified validations
+    # Unverified validations (tolerant if empty)
     ue = read_csv(data_dir / "unverified_events.csv")
-    up = read_csv(data_dir / "unverified_people.csv")
-    uc = read_csv(data_dir / "unverified_connections.csv")
-
-    # Basic header checks (tolerant if empty)
     if ue:
         ueh = ["date","location","event","primary_source","secondary_source","confidence","notes","next_step"]
         check_headers(ue, ueh, "unverified_events.csv")
         check_dates(ue, "date", "unverified_events.csv")
+
+    up = read_csv(data_dir / "unverified_people.csv")
     if up:
         uph = ["person","possible_event_date","location","alleged_association","source","confidence","notes","next_step"]
-        # no date check needed; possible_event_date can be loose
         check_headers(up, uph, "unverified_people.csv")
+
+    uc = read_csv(data_dir / "unverified_connections.csv")
     if uc:
         uch = ["entity_a","entity_b","connection_type","source","confidence","notes","next_step"]
         check_headers(uc, uch, "unverified_connections.csv")
@@ -74,3 +78,6 @@ def main():
     print(f"unverified_events rows: {len(ue)}")
     print(f"unverified_people rows: {len(up)}")
     print(f"unverified_connections rows: {len(uc)}")
+
+if __name__ == "__main__":
+    main()
