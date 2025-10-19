@@ -44,6 +44,9 @@ jobs:
           add: |
             data/master_timeline.csv
             data/verified_people_events.csv
+            data/unverified_events.csv
+            data/unverified_people.csv
+            data/unverified_connections.csv
             data/archive/
             CHECKLIST.md
           message: "chore: merge pending (events+people) + rebuild CHECKLIST.md"
