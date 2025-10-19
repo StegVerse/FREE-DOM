@@ -1,3 +1,4 @@
+[![AI Search Agent](https://github.com/StegVerse/FREE-DOM/actions/workflows/ai_search_agent.yml/badge.svg?branch=main)](https://github.com/StegVerse/FREE-DOM/actions/workflows/ai_search_agent.yml?query=branch%3Amain)
 # FREE-DOM
 [![Changelog Build](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml/badge.svg)](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml)
 
