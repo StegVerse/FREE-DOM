@@ -5,7 +5,7 @@ Looks only at files present in the repo (no network).
 """
 
 from __future__ import annotations
-import csv, os, pathlib
+import csv, pathlib
 from datetime import datetime
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -13,7 +13,7 @@ DATA = ROOT / "data"
 OUT_CSV = DATA / "CHANGELOG_batches.csv"
 OUT_MD  = ROOT / "CHANGELOG.md"
 
-# Known batches + friendly coverage labels (expand here when you add new batch types)
+# Append any new pending_* files you introduce later.
 BATCH_META = [
     # people
     ("pending_people_01.csv", "people", "—", "—"),
@@ -43,8 +43,7 @@ def count_rows(path: pathlib.Path) -> int:
         return 0
     try:
         with path.open(encoding="utf-8") as f:
-            # count minus header if present
-            return sum(1 for _ in f) - 1
+            return max(0, sum(1 for _ in f) - 1)  # minus header
     except Exception:
         return 0
 
@@ -56,25 +55,26 @@ def main():
     now = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
     for fname, category, start, end in BATCH_META:
-        p = (DATA / fname) if fname.startswith("pending_") else (ROOT / fname)
+        p = DATA / fname
         n = count_rows(p)
         if category == "events":
             cumulative_event_rows += n
         rows.append([now, fname, category, start, end, n,
                      cumulative_event_rows if category == "events" else ""])
 
-    # Write CSV
+    # CSV
     with OUT_CSV.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["timestamp_utc","batch_file","category","range_start","range_end","entries_in_batch","cumulative_event_entries"])
         w.writerows(rows)
 
-    # Write Markdown
+    # Markdown
     total_people = sum(int(r[5]) for r in rows if r[2] == "people")
     total_events = sum(int(r[5]) for r in rows if r[2] == "events")
 
     md = []
     md.append("# FREE-DOM • Data Batches Changelog\n")
+    md.append(f"[![Changelog Build](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml/badge.svg)](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml)\n")
     md.append(f"_Auto-generated: {now} (UTC)_\n")
     md.append("\n## Summary\n")
     md.append(f"- **People batches:** {total_people} rows\n")
