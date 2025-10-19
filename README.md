@@ -1,7 +1,13 @@
-# FREE-DOM: Factually Recounting Epstein’s Era – Deconstruction of Morality
-
+# FREE-DOM
 [![Changelog Build](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml/badge.svg)](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml)
 
+**FREE-DOM: Factually Recounting Epstein’s Era — Deconstruction of Morality**
+
+A public, evidence-first research repo designed for fiction authors: verified timelines of events, photo/video anchors, court dockets, and character-safe scene prompts.  
+- 📜 **[CHANGELOG](./CHANGELOG.md)** – auto-built progress and coverage  
+- ✅ **[CHECKLIST](./CHECKLIST.md)** – pending IDs, deep searches, unverified leads  
+- 📂 **[`data/`](./data/)** – CSVs: `master_timeline.csv`, `verified_people_events.csv`, unverified lead tables, and pending batches
+- 
 https://github.com/StegVerse/FREE-DOM
 
 **FREE-DOM** is an open-source factual archive reconstructing the verified
