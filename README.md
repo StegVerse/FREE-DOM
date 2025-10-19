@@ -11,6 +11,9 @@ Each dataset is compiled exclusively from verifiable public records:
 - Verified nonprofit filings and corporate registrations  
 - Photo/video evidence published by recognized outlets  
 
+## Data Changelog
+See the running data history in **[CHANGELOG.md](./CHANGELOG.md)** and the detailed CSV index **[`data/CHANGELOG_batches.csv`](./data/CHANGELOG_batches.csv)**.
+
 No speculation or unverified claims appear in this repository.
 The purpose is documentation and analysis of systemic moral collapse
 across legal, political, and cultural institutions.
