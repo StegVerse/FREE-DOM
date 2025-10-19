@@ -32,5 +32,14 @@ across legal, political, and cultural institutions.
 - Include at least one **source URL** per row (prefer primary sources).
 - Keep descriptions neutral and factual.
 
+## Automated Public-Source Sweep (AI Search Agent)
+The AI Search Agent runs daily to find **public, reputable-source leads** for items marked `deep_search_*: pending`.  
+- 🕒 Schedule: daily 10:30 UTC (and on demand)  
+- 🗂️ Output: appends URL leads to:
+  - `data/master_timeline.csv` → **notes**
+  - `data/verified_people_events.csv` → **deep_search_notes**
+- 📜 Logs: `data/ai_agent_logs/` (JSONL per run)
+- 🔒 Scope: **whitelisted public sources only** (see `data/sources_whitelist.csv`) — no private networks or dark web.
+
 ## License
 MIT
