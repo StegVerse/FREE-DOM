@@ -1,5 +1,7 @@
 # FREE-DOM: Factually Recounting Epstein’s Era – Deconstruction of Morality
 
+[![Changelog Build](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml/badge.svg)](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml)
+
 https://github.com/StegVerse/FREE-DOM
 
 **FREE-DOM** is an open-source factual archive reconstructing the verified
