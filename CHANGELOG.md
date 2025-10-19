@@ -1,6 +1,8 @@
 # FREE-DOM • Data Batches Changelog
 
-_Auto-generated: 2025-10-19T06:16:10Z (UTC)_
+[![Changelog Build](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml/badge.svg)](https://github.com/StegVerse/FREE-DOM/actions/workflows/auto_update.yml)
+
+_Auto-generated: 2025-10-19T06:17:35Z (UTC)_
 
 
 ## Summary
