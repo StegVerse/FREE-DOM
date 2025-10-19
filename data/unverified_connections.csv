@@ -1,1 +1,2 @@
 entity_a,entity_b,connection_type,source,confidence,notes,next_step
+John D.,Private charter flight,travel_manifest_overlap,unverified manifest,medium,date overlap but names not confirmed,compare FAA or court exhibits
