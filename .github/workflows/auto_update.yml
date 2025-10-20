@@ -23,15 +23,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug repo tree
-        run: |
-          echo "PWD: $(pwd)"
-          ls -la
-          echo "--- data/"
-          ls -la data || true
-          echo "--- scripts/"
-          ls -la scripts || true
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -51,6 +42,9 @@ jobs:
       - name: 🪵 Build Changelog (with semantic version bump)
         run: python scripts/build_changelog.py
 
+      - name: 🏷️ Build Version Badge
+        run: python scripts/make_version_badge.py
+
       - name: Validate CSVs
         run: python scripts/update_timeline.py
 
@@ -66,6 +60,7 @@ jobs:
             CHANGELOG.md
             data/summary/CHANGELOG_batches.csv
             data/summary/VERSION
+            docs/badges/version.svg
             data/master/master_timeline.csv
             data/master/verified_people_events.csv
             data/unverified/unverified_events.csv
@@ -73,7 +68,7 @@ jobs:
             data/unverified/unverified_connections.csv
             data/archive/
             CHECKLIST.md
-          message: "chore(auto-update): merge + rebuild checklist & changelog + validate"
+          message: "chore(auto-update): merge + rebuild checklist & changelog + version badge + validate"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
