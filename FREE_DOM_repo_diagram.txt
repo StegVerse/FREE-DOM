@@ -1,0 +1,46 @@
+
+FREE-DOM Repository Architecture
+=================================
+
+               ┌──────────────────────────┐
+               │    AI Search Agent       │
+               │  (search_agent.py)       │
+               └──────────┬───────────────┘
+                          │
+                          ▼
+                ┌────────────────────────┐
+                │   data/logs/ai_agent/  │
+                │  → JSONL hit logs       │
+                └──────────┬─────────────┘
+                          │
+                          ▼
+                ┌────────────────────────┐
+                │ build_ai_agent_summary │
+                │ → data/summary/        │
+                │   ai_agent_summary.csv │
+                │   ai_agent_sources_idx │
+                └──────────┬─────────────┘
+                          │
+                          ▼
+   ┌────────────────────────────────────────────────────┐
+   │                   Auto Update                      │
+   │        (import_pending + build_checklist)          │
+   └──────────┬──────────────────────────┬──────────────┘
+              │                          │
+              ▼                          ▼
+  ┌─────────────────────┐      ┌────────────────────────┐
+  │ data/pending/       │      │ data/unverified/       │
+  │ → events/people/... │      │ → unverified_*.csv     │
+  └──────────┬──────────┘      └──────────┬─────────────┘
+              │                          │
+              ▼                          ▼
+   ┌────────────────────┐       ┌────────────────────┐
+   │ data/master/       │       │ data/archive/      │
+   │ → master_timeline  │       │ → processed files  │
+   └────────────────────┘       └────────────────────┘
+                          │
+                          ▼
+                ┌────────────────────────┐
+                │ CHECKLIST.md           │
+                │ CHANGELOG.md           │
+                └────────────────────────┘
