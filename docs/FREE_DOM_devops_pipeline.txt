@@ -1,0 +1,63 @@
+
+FREE-DOM • DevOps Data Pipeline (Technical View)
+================================================
+
+  [Author/Contributor]
+          |
+          v
+  +---------------------+
+  |  Commit CSVs/Code   |
+  |  (pending/, sources/|
+  |   scripts/, etc.)   |
+  +----------+----------+
+             |
+     GitHub Triggers
+             |
+   +---------+---------------------------------------------------------------+
+   |                                                                       |
+   | on push to main / workflow_dispatch / schedule                        |
+   |                                                                       |
+   +--------------------+-----------------------------+---------------------+
+                        |                             |
+                        |                             |
+                        v                             v
+          (1) Auto Update Workflow          (2) AI Search Agent Workflow (cron daily)
+          ---------------------------        ---------------------------------------
+          Steps:                             Steps:
+            - setup-python                     - setup-python
+            - install pandas                   - install pandas/bs4/feedparser/requests
+            - import_pending.py                - search_agent.py (public OSINT)
+                • read data/pending/...        • reads data/sources/sources_whitelist.csv
+                • merge → data/master/         • appends "Leads:" to notes/deep_search_notes
+                • archive processed CSVs       • logs → data/logs/ai_agent/agent_run_*.jsonl
+            - build_checklist.py               - build_ai_agent_summary.py
+                • CHECKLIST.md                   • data/summary/ai_agent_summary.csv
+            - build_changelog.py                • data/summary/ai_agent_sources_index.csv
+                • CHANGELOG.md                 - commit changed artifacts
+            - update_timeline.py              
+            - commit changed artifacts
+                        |                             |
+                        +--------------+--------------+
+                                       |
+                                       v
+                          +-------------------------------+
+                          |  data/master/                 |
+                          |  data/unverified/             |
+                          |  data/summary/                |
+                          |  data/logs/ai_agent/          |
+                          |  CHECKLIST.md / CHANGELOG.md  |
+                          +-------------------------------+
+                                       |
+                                       v
+                         +------------------------------+
+                         |   Consumers (Writers, Apps)  |
+                         |   - read master_timeline     |
+                         |   - query people/events      |
+                         |   - cite using source_urls   |
+                         +------------------------------+
+
+  Security/Policy Guardrails
+  --------------------------
+  • Agent scans only whitelisted public sources (RSS/pages).
+  • No dark-web, private, or non-consensual data scraping.
+  • No accusations; store leads as URLs for human review.
