@@ -54,7 +54,12 @@ This project depends on factual accuracy, technical reproducibility, and ethical
 - Respect privacy and anonymity at all times.  
 - Avoid identifying living individuals directly.  
 - Use neutral, descriptive language.  
-- Maintain public source traceability.
+- Maintain public source traceability.  
+- **Sensitive Information Protocol:** If your submission contains identifiers, testimony, or allegations, **do not** upload them publicly. Instead, request a secure submission channel. We will:  
+  1) **Review & store** sensitive materials in a secure location,  
+  2) **Refer** credible criminal allegations to appropriate authorities or qualified journalists, and  
+  3) **Integrate** only anonymized, non-identifying details that meet our policies.  
+  See the full [Ethics & Privacy Policy](docs/ETHICS_AND_PRIVACY_POLICY.md).
 
 ---
 

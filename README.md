@@ -6,6 +6,19 @@ A public, evidence-first research repository designed to support fiction authors
 
 ---
 
+## 📘 Table of Contents
+- [Workflow Status](#-workflow-status)
+- [Repository Layout](#-repository-layout)
+- [Workflows Overview](#️-workflows-overview)
+- [Purpose](#-purpose)
+- [Sensitive Information Protocol](#-sensitive-information-protocol)
+- [Documentation & Policies](#-documentation--policies)
+- [Data Folder Reference](#-data-folder-reference)
+- [Contributing](#-contributing)
+- [Repository Live Status](#-repository-live-status)
+
+---
+
 ## 🧩 Workflow Status
 
 | Workflow | Status | Description |
@@ -28,6 +41,7 @@ data/
   archive/             ← Processed import snapshots for audit
 scripts/               ← Automation scripts and utilities
 .github/workflows/     ← CI/CD for ingestion and validation
+docs/                  ← Diagrams, ASCII maps, badges, and policies
 ```
 
 ---
@@ -47,31 +61,21 @@ It keeps transparency high, maintains auditability, and prevents misinformation.
 
 ---
 
-## 📊 Repository Architecture
+## 🔒 Sensitive Information Protocol
+Submissions containing identifying details, personal testimony, or allegations are handled under strict privacy rules:
 
-![FREE-DOM Repo Diagram](docs/FREE_DOM_repo_diagram.png)
+1. **Review & Secure Storage:** Such submissions are **not** placed in the public repo. They are reviewed and stored in an encrypted location.  
+2. **Possible Referral:** Credible allegations of criminal activity **may be referred** to relevant authorities or qualified journalists.  
+3. **Public Integration (Anonymized):** We will include **only** non-identifying details (dates, locations, public sources) that meet our policies.
 
-<details>
-<summary>ASCII Diagram</summary>
-
-```txt
-(see docs/FREE_DOM_repo_diagram.txt for full ASCII)
-```
-</details>
+See the full [Ethics & Privacy Policy](docs/ETHICS_AND_PRIVACY_POLICY.md).
 
 ---
 
-## 🔧 DevOps Data Pipeline
-
-![DevOps Pipeline](docs/FREE_DOM_devops_pipeline.png)
-
-<details>
-<summary>ASCII Version</summary>
-
-```txt
-(see docs/FREE_DOM_devops_pipeline.txt for full ASCII)
-```
-</details>
+## 📄 Documentation & Policies
+- **Ethics & Privacy Policy:** [docs/ETHICS_AND_PRIVACY_POLICY.md](docs/ETHICS_AND_PRIVACY_POLICY.md)  
+- **Terms of Access / Use:** [TERMS_OF_ACCESS.md](TERMS_OF_ACCESS.md)  
+- **Documentation Index:** [docs/README.md](docs/README.md)
 
 ---
 
@@ -89,24 +93,13 @@ It keeps transparency high, maintains auditability, and prevents misinformation.
 
 ---
 
-## 🧮 Scripts
-
-- `scripts/search_agent.py` — performs OSINT sweeps and lead enrichment.  
-- `scripts/build_ai_agent_summary.py` — builds hit summaries & source indexes.  
-- `scripts/import_pending.py` — merges pending data into master datasets.  
-- `scripts/build_checklist.py` — generates verification checklist.  
-- `scripts/build_changelog.py` — **semantic versioning** + changelog and snapshots.  
-- `scripts/update_timeline.py` — validates dataset integrity.
-
----
-
 ## 🧱 Contributing
-
 Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file before submitting updates.  
 All contributions should respect:
 - factual accuracy (publicly verifiable sources only),
 - anonymity and non-implication of real individuals,
-- reproducibility and version traceability.
+- reproducibility and version traceability,
+- compliance with the [Ethics & Privacy Policy](docs/ETHICS_AND_PRIVACY_POLICY.md).
 
 ---
 
