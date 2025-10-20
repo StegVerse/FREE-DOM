@@ -7,7 +7,8 @@ on:
       - "data/**"
       - "scripts/**"
       - "README.md"
-      - ".github/workflows/auto_update.yml"
+      - "CONTRIBUTING.md"
+      - ".github/workflows/**"
   workflow_dispatch: {}
 
 permissions:
@@ -47,7 +48,7 @@ jobs:
       - name: Build checklist
         run: python scripts/build_checklist.py
 
-      - name: Build changelog
+      - name: 🪵 Build Changelog (with semantic version bump)
         run: python scripts/build_changelog.py
 
       - name: Validate CSVs
@@ -62,6 +63,9 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: |
+            CHANGELOG.md
+            data/summary/CHANGELOG_batches.csv
+            data/summary/VERSION
             data/master/master_timeline.csv
             data/master/verified_people_events.csv
             data/unverified/unverified_events.csv
@@ -69,14 +73,13 @@ jobs:
             data/unverified/unverified_connections.csv
             data/archive/
             CHECKLIST.md
-            CHANGELOG.md
-            data/summary/CHANGELOG_batches.csv
-          message: "chore: merge + rebuild checklist & changelog"
+          message: "chore(auto-update): merge + rebuild checklist & changelog + validate"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Show file heads
         run: |
+          echo "::group::VERSION"; cat data/summary/VERSION || true; echo "::endgroup::"
           echo "::group::master_timeline head"; head -n 20 data/master/master_timeline.csv || true; echo "::endgroup::"
           echo "::group::verified_people_events head"; head -n 20 data/master/verified_people_events.csv || true; echo "::endgroup::"
           echo "::group::unverified_events head"; head -n 20 data/unverified/unverified_events.csv || true; echo "::endgroup::"
