@@ -16,7 +16,7 @@ The system maintains transparency and verifiability without crossing ethical or 
 
 ## 📊 Repository Architecture
 
-![FREE-DOM Repo Diagram](docs/FREE_DOM_repo_diagram.png)
+![FREE-DOM Repo Diagram](docs/FREE_DOM_repo_diagram.txt)
 
 <details>
 <summary>ASCII Version (click to expand)</summary>
