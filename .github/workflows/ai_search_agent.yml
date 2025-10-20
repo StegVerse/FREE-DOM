@@ -8,7 +8,9 @@ on:
     branches: [ "main" ]
     paths:
       - "scripts/search_agent.py"
-      - "data/sources_whitelist.csv"
+      - "scripts/build_ai_agent_summary.py"
+      - "data/sources/**"
+      - "data/pending/**"
 
 permissions:
   contents: write
@@ -47,14 +49,14 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: |
-            data/unverified_events.csv
-            data/unverified_people.csv
-            data/unverified_connections.csv
-            data/master_timeline.csv
-            data/verified_people_events.csv
-            data/ai_agent_logs/
-            data/ai_agent_summary.csv
-            data/ai_agent_sources_index.csv
+            data/master/master_timeline.csv
+            data/master/verified_people_events.csv
+            data/unverified/unverified_events.csv
+            data/unverified/unverified_people.csv
+            data/unverified/unverified_connections.csv
+            data/logs/ai_agent/
+            data/summary/ai_agent_summary.csv
+            data/summary/ai_agent_sources_index.csv
           message: "chore(ai-agent): update CSVs with public-source leads + summary"
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
