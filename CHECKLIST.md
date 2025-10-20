@@ -1148,11 +1148,11 @@ _All items resolved._
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15-cv-7433)|Unsealing order; combined filing appears on docket|U.S. District Court SDNY; Judge Loretta Preska||
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|ECF 1320.0 – Combined Unsealed Filing (Jan 3, 2024)|U.S. District Court SDNY; Judge Loretta Preska||
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|ORDER striking docket entries 1320‑13, 1320‑14, 1320‑15, 1320‑39, 1320‑40|U.S. District Court SDNY; Judge Loretta A. Preska|Retrieve direct PDF for striking order if available; map linked sub‑entries to mirror archives.|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑13|N/A|Confirm if mirror PDF exists in public archives (e.g., Public Intelligence).|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑14|N/A|Cross‑reference if any mirror exists with identical timestamp.|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑15|N/A|Cross‑reference for mirror availability and timestamps.|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑39|N/A|Mirror check and date alignment against remaining sub‑entries.|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑40|N/A|Confirm last entry in struck set; identify next sequential docket retained.|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑13||Confirm if mirror PDF exists in public archives (e.g., Public Intelligence).|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑14||Cross‑reference if any mirror exists with identical timestamp.|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑15||Cross‑reference for mirror availability and timestamps.|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑39||Mirror check and date alignment against remaining sub‑entries.|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑40||Confirm last entry in struck set; identify next sequential docket retained.|
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Unsealing Order Entered – Rolling Releases to Follow|Judge Loretta Preska; parties||
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Unsealing order; docket item **ECF 1320** (combined) appears in public record|U.S. District Court SDNY; Judge Loretta Preska||
 |2024-01-04|Online archives|Additional unsealed document compilations mirrored by archives|PublicIntelligence; third-party mirrors||
@@ -1167,6 +1167,7 @@ _All items resolved._
 |2025-09-02|Washington DC (House Oversight)|Committee release: DOJ production (33,295 pages)|House Oversight; DOJ||
 |2025-09-02|Washington DC (House Oversight)|Committee Release: DOJ Production (33,295 pages) – Direct Post|U.S. House Committee on Oversight and Accountability; DOJ|Find permalink; capture publication time; attach PDF filename list|
 |2025-09-02|Washington DC (House Oversight)|House Oversight Video: DOJ Production (33,295 pages) Press Avail|House Oversight; committee staff||
+|2025-09-03|New York, NY / ABC News (GMA)|Interview: Marina Lacerda speaks publicly for first time about abuse and calls for release of files|Marina Lacerda; ABC News (GMA)|Capture full segment URL(s), transcript, and any corroborating affidavit references.|
 |2025-09-03|Washington DC (Major Networks)|Network Evening News Roundups – Transcripts|ABC/CBS/NBC producers|Collect transcript links; note air times; add closed caption references|
 |2025-09-03|Washington DC (PBS)|PBS NewsHour Field Package: Capitol Pressers – Transcript|Lisa Desjardins; PBS NewsHour|Find package page; add transcript URL; include producer credits|
 |2025-09-03|Washington DC (U.S. Capitol)|C‑SPAN Clip: Survivor Statements (Clip A)|Survivors (group A)|Insert specific Clip ID; add timecodes; confirm speakers|
@@ -1179,6 +1180,8 @@ _All items resolved._
 |2025-09-03|Washington DC (U.S. Capitol)|C‑SPAN: Survivor Statements to Press (rotunda/triangle feed segments)|Survivors (various)||
 |2025-09-03|Washington DC (U.S. Capitol)|C‑SPAN: Survivors of Jeffrey Epstein Press Conference|Members of Congress; survivors||
 |2025-09-03|Washington DC (U.S. Capitol)|Survivor press event and member presser (C-SPAN)|Members of Congress (e.g., Ro Khanna, Thomas Massie); survivors (various)||
+|2025-09-03|Washington, DC / U.S. Capitol|Survivors and members of Congress call for release of Epstein files (press conference)|Reps. Ro Khanna; Rep. Thomas Massie; Rep. Marjorie Taylor Greene; Marina Lacerda; other survivors|Extract exact roster of speakers from C‑SPAN/House feeds; add clip IDs and timestamps.|
+|2025-09-04|Washington, DC / ABC Nightline|Interview follow‑up: Marina Lacerda appears on Nightline with survivors, urging release of files|Marina Lacerda; ABC Nightline|Pull Nightline program ID and production notes; add stills/asset IDs if available.|
 |2025-09-08|Washington DC|Committee release of Estate production|U.S. House Oversight; Epstein Estate||
 |2025-09-08|Washington DC|House Oversight: Estate production release|House Oversight; Epstein Estate||
 |2025-09-08|Washington DC (House Oversight)|Committee release: Estate production|House Oversight; Epstein Estate||
@@ -1197,6 +1200,7 @@ _All items resolved._
 |2025-10-10|Washington DC (House Oversight)|Committee Materials Index/FAQ (if posted) – Direct Post|House Oversight staff|Locate and paste direct URL; note sections and downloadable assets|
 |2025-10-10|Washington DC (House Oversight)|Committee posts supplemental materials index (calendars/call logs list)|House Oversight site|capture filenames; structure; any redaction notes|
 |2025-10-15|Washington DC (Press)|Preview pieces on forthcoming committee document batches|National outlets|collect exact preview URLs; note sources’ characterization|
+|2025-10-17|London, UK / Buckingham Palace|Prince Andrew announces relinquishing remaining royal titles (incl. Duke of York) amid scrutiny over Epstein ties|Prince Andrew; King Charles III; Royal Household (press)|Cross-check with official Royal communications office release; capture any UK government formal process notes.|
 |2025-10-17|Washington DC|Additional batch incl. Acosta interview transcript; new calendars/logs|House Oversight; Alex Acosta||
 |2025-10-17|Washington DC|Additional committee release (transcripts/calendars/call logs incl. Acosta interview)|U.S. House Oversight; Alex Acosta (interview)||
 |2025-10-17|Washington DC|Committee batch includes Alex Acosta interview transcript; calendars/call logs|House Oversight; Alex Acosta||
