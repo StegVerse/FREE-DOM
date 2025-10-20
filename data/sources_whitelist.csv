@@ -10,3 +10,7 @@ The New York Times US RSS,rss,https://rss.nytimes.com/services/xml/rss/nyt/US.xm
 The Washington Post Politics RSS,rss,https://feeds.washingtonpost.com/rss/politics,"Major outlet"
 Oversight Homepage,site,https://oversight.house.gov/,"Homepage scan for new links"
 C-SPAN Search Landing,site,https://www.c-span.org/,"Top-level link harvesting"
+The Guardian UK RSS,rss,https://www.theguardian.com/uk/rss,"UK political & royal coverage"
+Reuters UK RSS,rss,https://www.reuters.com/world/uk/rss,"International and Royal reporting"
+ABC News US RSS,rss,https://abcnews.go.com/abcnews/topstories,"U.S. & human interest"
+PBS News RSS,rss,https://www.pbs.org/newshour/feeds/rss,"U.S. politics & public affairs"
