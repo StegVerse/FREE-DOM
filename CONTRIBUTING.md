@@ -1,32 +1,93 @@
-# Contributing to FREE-DOM
+---
 
-Thank you for contributing to the FREE-DOM project.
+# 5) `CONTRIBUTING.md` (full)
 
-## 🧭 File Placement Rules
+```markdown
+# 🤝 Contributing to FREE-DOM
 
-| Folder | Purpose | Notes |
-|--------|----------|-------|
-| `data/master/` | Canonical verified datasets | Updated automatically by workflows |
-| `data/pending/events/` | New event rows awaiting verification | Use `pending_updates_template.csv` |
-| `data/pending/people/` | New person/event associations | Use `pending_people_template.csv` |
-| `data/pending/unverified/` | Leads not yet confirmed | Use `pending_unverified_template.csv` |
-| `data/unverified/` | Consolidated unverified datasets | Auto-managed |
-| `data/sources/` | Whitelisted RSS/news feeds | Maintained manually |
-| `data/logs/ai_agent/` | AI Search Agent logs | Auto-generated |
-| `data/summary/` | Aggregated dashboards | Auto-generated |
-| `data/archive/` | Processed import archives | Automatically versioned |
+Thank you for your interest in contributing to **FREE-DOM**, a StegVerse initiative.  
+This project depends on factual accuracy, technical reproducibility, and ethical rigor.
 
-## 🧩 Adding New Data
+---
 
-1. Copy a template from `data/pending/...`.
-2. Fill out rows carefully (dates as `YYYY-MM-DD`).
-3. Commit directly to `main`.
-4. The **Auto Update** workflow merges and archives your submission.
-5. The **AI Search Agent** enriches data nightly with verified public-source links.
+## ⚙️ Contribution Workflow
 
-## 🧪 Manual Workflow Runs
+1. **Fork** the repository and create a new branch:  
+   ```bash
+   git checkout -b feature/your-branch-name
+2.	Add or modify data in the correct subdirectory:
+	•	data/pending/ — new or partially verified submissions
+	•	data/unverified/ — leads needing confirmation
+	•	data/master/ — (CI-managed) fully verified datasets
+	3.	Run local checks (optional but recommended):
+python scripts/build_checklist.py
+python scripts/build_changelog.py
+python scripts/update_timeline.py
 
-- **Run “AI Search Agent”** → performs RSS sweep & builds new summary dashboards.
-- **Run “Auto Update”** → merges pending CSVs, regenerates CHECKLIST.md & CHANGELOG.md.
+	4.	Commit and push your changes:
+git add .
+git commit -m "Add: new verified entries"
+git push origin feature/your-branch-name
 
-> Each workflow commits automatically only when file changes are detected.
+	5.	Open a Pull Request and include:
+	•	Source reliability
+	•	Verification stage (pending / confirmed)
+	•	Notes on any leads or anomalies
+
+⸻
+
+🧠 Standards of Evidence
+Requirement
+Description
+Factual Accuracy
+Publicly verifiable information only
+Non-Implicative
+No accusations, assumptions, or speculation
+Traceability
+Provide reproducible data sources (URLs/dockets/RSS)
+Format Compliance
+Pass CSV schema validation via CI
+
+🧩 Ethics & Legal
+	•	Respect privacy and anonymity at all times.
+	•	Avoid identifying living individuals directly.
+	•	Use neutral, descriptive language.
+	•	Maintain public source traceability.
+
+⸻
+
+🧰 Scripts
+	•	search_agent.py — automated public OSINT sweeps
+	•	build_checklist.py — regenerates pending verification items
+	•	build_changelog.py — versions & logs changes automatically
+
+🧾 Review
+
+All PRs are automatically validated by GitHub Actions:
+	•	Schema checks
+	•	Duplicate detection
+	•	Basic lead verification
+
+Maintainers merge PRs that pass checks and meet ethical standards.
+
+⸻
+
+Thank you for strengthening the public record — one verifiable entry at a time.
+
+---
+
+# 6) `CHANGELOG.md` (seed file — CI will prepend entries)
+
+```markdown
+# 🧾 FREE-DOM — CHANGELOG
+
+All notable changes are recorded by the `Auto Update` workflow.
+
+---
+
+## v1.0.0 — Initial Structure (seed)
+- Established `data/` hierarchy (master, pending, unverified, sources, logs, summary, archive)
+- Added CI workflows and core scripts
+- Introduced semantic versioning via `build_changelog.py`
+
+---
