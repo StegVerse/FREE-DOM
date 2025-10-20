@@ -40,8 +40,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pandas
-          python -V
-          python -c "import pandas, sys; print('pandas', pandas.__version__)"
 
       - name: Merge pending (events + people + unverified)
         run: python scripts/import_pending.py
@@ -64,23 +62,23 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: |
-            data/master_timeline.csv
-            data/verified_people_events.csv
-            data/unverified_events.csv
-            data/unverified_people.csv
-            data/unverified_connections.csv
+            data/master/master_timeline.csv
+            data/master/verified_people_events.csv
+            data/unverified/unverified_events.csv
+            data/unverified/unverified_people.csv
+            data/unverified/unverified_connections.csv
             data/archive/
             CHECKLIST.md
             CHANGELOG.md
-            data/CHANGELOG_batches.csv
+            data/summary/CHANGELOG_batches.csv
           message: "chore: merge + rebuild checklist & changelog"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Show file heads
         run: |
-          echo "::group::master_timeline head"; head -n 20 data/master_timeline.csv || true; echo "::endgroup::"
-          echo "::group::verified_people_events head"; head -n 20 data/verified_people_events.csv || true; echo "::endgroup::"
-          echo "::group::unverified_events head"; head -n 20 data/unverified_events.csv || true; echo "::endgroup::"
+          echo "::group::master_timeline head"; head -n 20 data/master/master_timeline.csv || true; echo "::endgroup::"
+          echo "::group::verified_people_events head"; head -n 20 data/master/verified_people_events.csv || true; echo "::endgroup::"
+          echo "::group::unverified_events head"; head -n 20 data/unverified/unverified_events.csv || true; echo "::endgroup::"
           echo "::group::CHECKLIST preview"; head -n 60 CHECKLIST.md || true; echo "::endgroup::"
           echo "::group::CHANGELOG preview"; head -n 60 CHANGELOG.md || true; echo "::endgroup::"
