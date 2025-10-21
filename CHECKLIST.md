@@ -6,7 +6,9 @@ Built each push. Items disappear once IDs/links are added or deep searches are m
 
 ## 🗓️ C-SPAN Segments Needing Program/Clip IDs
 
-_All items resolved._
+|Event Title|Date|Location|Program/Clip ID|Verified|Notes|
+|---|---|---|---|---|---|
+|Survivor press event and member presser (C-SPAN)|2025-09-03|Washington DC (U.S. Capitol)|TBD|☐|Presence on public video; no ethnicity breakdown published.|
 
 
 ## ⚖️ CourtListener / SDNY Docket Items
@@ -34,6 +36,7 @@ _All items resolved._
 |2019-07-20|Little St. James USVI|Reuters aerial photo set published|TBD|☐|High‑res island geography for scene setting.|
 |2019-07-20|Little St. James USVI|Reuters Aerial Photo Set: Island Facilities/Topography (Marco Bello)|TBD|☐|Wire gallery anchor; add specific asset ID when retrieved.|
 |2019-07-20|Little St. James USVI|Reuters Aerials: Island Facilities/Topography – Specific Gallery URL|TBD|☐|Replace with specific gallery/asset slug or ID|
+|2019-07-20–2019-08-20|Little St. James USVI|Reuters aerial/documentation packages|TBD|☐|High-res island scene geography.|
 |2019-07-31|New York NY (MCC / court)|Ongoing filings and media coverage; additional wire sets|TBD|☐|Late-July coverage anchor.|
 
 
@@ -68,23 +71,18 @@ _All items resolved._
 |2003-03-01|New York NY|Vanity Fair profile publication (context)|Jeffrey Epstein (subject)||
 |2004-01-15|Palm Beach FL|PBPD begins compiling materials related to complaints (pre-2005 reporting)|Palm Beach Police Department||
 |2004-08-12|Palm Beach FL|Press references to PBPD inquiry run-up (pre-2005)|Palm Beach Police Department||
-|2005-01-21|Palm Beach FL|Deposition excerpt (later produced) confirms travel to USVI and gifts for 'guests'|Household staff witness||
 |2005-03-01|Palm Beach FL|PBPD opens investigation (triggered by complaint)|Palm Beach Police Department; Det. Joseph Recarey||
 |2005-03-15|Palm Beach FL|PBPD investigation window (complaint received; inquiry begins)|Palm Beach Police Department||
 |2005-07-25|Palm Beach FL|Search warrants and affidavits reported in media coverage of PBPD probe|Palm Beach Police Department||
 |2005-07-25|Palm Beach FL|Warrant/affidavit activity reported by local media during PBPD investigation|Palm Beach Police Department||
-|2006-01-01|Phoenix/Scottsdale AZ|Founding of nonprofit Everyday Heroes Like You (EHLY); later IRS 501(c)(3)|Erika Frantzve (Kirk); EHLY||
 |2006-05-12|Palm Beach FL|Press notes growing PBPD case file and state-level actions|Palm Beach County State Attorney; PBPD||
-|2006-06-01|Palm Beach FL|Escalation of investigation and filings|Palm Beach County State Attorney; PBPD||
 |2007-06-30|Miami FL|Non-prosecution agreement period referenced in press histories|U.S. Attorney’s Office (SDFL); defense counsel||
 |2007-07-09|Miami FL|Miami Herald reporting later outlines NPA history and negotiations|U.S. Attorney’s Office (SDFL); defense counsel||
 |2007-11-30|Miami FL|Non-prosecution agreement (NPA) background detailed by Miami Herald investigation|SDFL; defense counsel||
 |2008-06-30|Palm Beach FL|Florida plea & sentencing reported|State of Florida; Jeffrey Epstein||
-|2008-06-30|Palm Beach FL|State plea and sentencing (Florida)|Jeffrey Epstein; State of Florida||
 |2008-07-01|Palm Beach FL|Registered sex offender status reports begin (state)|State of Florida||
 |2008-07-01|Palm Beach FL|Sex offender registry status begins to be publicly referenced in reporting|State of Florida||
 |2008-08-01|Palm Beach FL|Registry reporting and local monitoring post-plea|State of Florida||
-|2010-03-19|Palm Beach FL|Det. Joseph Recarey deposition (later produced in 2016 discovery)|Det. Joseph Recarey; counsel||
 |2010-06-01|Santa Fe NM (Zorro Ranch)|Property portfolio coverage includes New Mexico ranch|Jeffrey Epstein (owner)||
 |2010-08-01|New Mexico (Zorro Ranch)|Media references to property portfolio including New Mexico ranch|Jeffrey Epstein (property owner)||
 |2010-12-05|New York NY (Central Park)|Candid photographs document walk|Prince Andrew; Jeffrey Epstein||
@@ -96,7 +94,6 @@ _All items resolved._
 |2011-09-15|Cambridge MA|Tech reporting details Media Lab donations/visits; describes 'Eastern European models' guests|MIT Media Lab; Joi Ito||
 |2011-12-01|Cambridge MA|MIT Media Lab donations controversy begins to surface; internal emails later public|MIT Media Lab; Joi Ito||
 |2011-12-15|Cambridge MA|MIT Media Lab: internal email chronology later disclosed|MIT Media Lab; Joi Ito||
-|2011-12-31|Constanța Romania|Romanian media report donations to orphanage/hospital (2011–2015)|Everyday Heroes Like You volunteers||
 |2012-01-20|Constanța Romania|Romanian Angels/EHLY visit coverage in Romanian press (early 2012)|Erika Frantzve (Kirk); EHLY||
 |2012-05-01|Las Vegas NV / Phoenix AZ|Miss Arizona USA 2012; Miss USA participation|Erika Frantzve (Kirk); Miss USA Organization||
 |2012-06-03|Las Vegas NV|Miss USA 2012 broadcast (Erika Frantzve competes)|Erika Frantzve (Kirk); Miss USA Organization||
@@ -112,11 +109,9 @@ _All items resolved._
 |2014-12-30|New York NY|Court filings (Giuffre v. Maxwell) initial civil action timeframe|Virginia Giuffre; Ghislaine Maxwell||
 |2015-01-03|London / New York|Renewed international media coverage of accusations (2015 wave)|News organizations||
 |2015-01-04|UK|BBC coverage: allegations resurface widely|BBC News||
-|2015-01-10|Email (UK/US legal PR)|Maxwell email re legal/press risk ('press hell')|Ghislaine Maxwell (sender); advisers (recipients)||
 |2015-01-10|UK/US (email)|Maxwell internal email re 'press hell' (as unsealed later)|Ghislaine Maxwell||
 |2016-05-20|New York NY|Civil discovery scheduling discussions ahead of June depositions|Counsel of record||
 |2016-06-07|New York NY (575 Lexington Ave)|Scheduled civil deposition per subpoena (AO 88A)|Sigrid S. McCawley (issuing counsel); deponents (various)||
-|2016-06-17|Fort Lauderdale FL (counsel letter)|Production of PBPD deposition + incident report|Boies Schiller Flexner; Haddon Morgan & Foreman||
 |2016-06-17|New York NY|Counsel letter listing produced materials incl. PBPD deposition, incident report|Boies Schiller Flexner; Haddon Morgan & Foreman||
 |2017-11-30|New York NY|Press pieces revisit case history and associates (pre-2019 arrest)|Various media outlets||
 |2019-07-06|New York NY|Arrest announced; SDNY press & wire coverage|DOJ; SDNY||
@@ -1148,11 +1143,11 @@ _All items resolved._
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15-cv-7433)|Unsealing order; combined filing appears on docket|U.S. District Court SDNY; Judge Loretta Preska||
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|ECF 1320.0 – Combined Unsealed Filing (Jan 3, 2024)|U.S. District Court SDNY; Judge Loretta Preska||
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|ORDER striking docket entries 1320‑13, 1320‑14, 1320‑15, 1320‑39, 1320‑40|U.S. District Court SDNY; Judge Loretta A. Preska|Retrieve direct PDF for striking order if available; map linked sub‑entries to mirror archives.|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑13||Confirm if mirror PDF exists in public archives (e.g., Public Intelligence).|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑14||Cross‑reference if any mirror exists with identical timestamp.|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑15||Cross‑reference for mirror availability and timestamps.|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑39||Mirror check and date alignment against remaining sub‑entries.|
-|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑40||Confirm last entry in struck set; identify next sequential docket retained.|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑13|N/A|Confirm if mirror PDF exists in public archives (e.g., Public Intelligence).|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑14|N/A|Cross‑reference if any mirror exists with identical timestamp.|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑15|N/A|Cross‑reference for mirror availability and timestamps.|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑39|N/A|Mirror check and date alignment against remaining sub‑entries.|
+|2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Struck entry 1320‑40|N/A|Confirm last entry in struck set; identify next sequential docket retained.|
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Unsealing Order Entered – Rolling Releases to Follow|Judge Loretta Preska; parties||
 |2024-01-03|SDNY Docket (Giuffre v. Maxwell, 15‑cv‑7433)|Unsealing order; docket item **ECF 1320** (combined) appears in public record|U.S. District Court SDNY; Judge Loretta Preska||
 |2024-01-04|Online archives|Additional unsealed document compilations mirrored by archives|PublicIntelligence; third-party mirrors||
@@ -1218,10 +1213,7 @@ _All items resolved._
 
 ## 🔎 Deep Searches Pending – People at Events
 
-|Date|Location|Event|Person|Role|Search Notes|
-|---|---|---|---|---|---|
-|2010-12-05|New York NY (Central Park)|Photographs of walk in the park|Jeffrey Epstein|subject|search: wire captions, photographer interviews|
-|2010-12-05|New York NY (Central Park)|Photographs of walk in the park|Prince Andrew|public figure|search: UK press, BBC, docket mentions|
+_All items resolved._
 
 
 ## 🔸 Unverified Events – Awaiting Verification

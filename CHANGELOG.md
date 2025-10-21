@@ -1,3 +1,30 @@
+## v1.0.1 — 2025-10-20
+**Commit:** `7e9f2a2` — Update and rename data/unverified_connections.csv to data/unverified/unverified_connections.csv  
+**Author:** StegVerse  **Branch:** `main`  **Workflow:** `Merge Pending, Build Checklist & Changelog, Validate` (run 18671231768)
+
+<details><summary>Changed files</summary>
+
+```txt
+data/unverified/unverified_connections.csv
+```
+</details>
+
+| Dataset | Count |
+|---|---:|
+| master_timeline.csv | 1165 |
+| verified_people_events.csv | 2 |
+| unverified_events.csv | 1 |
+| unverified_people.csv | 1 |
+| unverified_connections.csv | 1 |
+
+| Pending Batches | Count |
+|---|---:|
+| data/pending/events | 0 |
+| data/pending/people | 0 |
+| data/pending/unverified | 0 |
+
+---
+
 # 🧾 FREE-DOM — CHANGELOG
 
 All notable changes to this project will be documented here.  
