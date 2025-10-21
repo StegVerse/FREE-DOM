@@ -1,0 +1,53 @@
+name: Bootstrap TV Policy Repo
+
+on:
+  workflow_dispatch:
+    inputs:
+      org:
+        description: "Target organization"
+        required: true
+        default: "StegVerse"
+      repo:
+        description: "New private repo name"
+        required: true
+        default: "token-vault-config"
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create private repo (if it doesn't exist)
+        env:
+          GH_TOKEN: ${{ secrets.TV_BOOTSTRAP_TOKEN }}
+          ORG: ${{ github.event.inputs.org }}
+          REPO: ${{ github.event.inputs.repo }}
+        run: |
+          set -euo pipefail
+          echo "Creating repo $ORG/$REPO (private) if missing…"
+          curl -sS -H "Authorization: token $GH_TOKEN"                -H "Accept: application/vnd.github+json"                https://api.github.com/orgs/$ORG/repos                -d '{"name":"'"$REPO"'","private":true}'                | tee /tmp/create_resp.json || true
+
+      - name: Push policy scaffold to the new repo
+        env:
+          GH_TOKEN: ${{ secrets.TV_BOOTSTRAP_TOKEN }}
+          ORG: ${{ github.event.inputs.org }}
+          REPO: ${{ github.event.inputs.repo }}
+        run: |
+          set -euo pipefail
+          WORK=/tmp/policy_seed
+          rm -rf "$WORK"
+          mkdir -p "$WORK"
+          cp -R stegverse_tv_policy/* "$WORK/"
+          cd "$WORK"
+          git init -b main
+          git config user.name "tv-bootstrap-bot"
+          git config user.email "tv-bootstrap-bot@users.noreply.github.com"
+          git add .
+          git commit -m "seed: initial TV policy scaffold"
+          git remote add origin https://${GH_TOKEN}@github.com/$ORG/$REPO.git
+          git push -u origin main
