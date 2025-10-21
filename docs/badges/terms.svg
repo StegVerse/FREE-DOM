@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="124" height="20" role="img" aria-label="Terms: of Access">
+  <linearGradient id="g" x2="0" y2="100%">
+    <stop offset="0" stop-color="#fff" stop-opacity=".7"/>
+    <stop offset=".1" stop-opacity=".1"/>
+    <stop offset=".9" stop-opacity=".3"/>
+    <stop offset="1" stop-opacity=".5"/>
+  </linearGradient>
+  <mask id="m">
+    <rect width="124" height="20" rx="3" fill="#fff"/>
+  </mask>
+  <g mask="url(#m)">
+    <rect width="50" height="20" fill="#555"/>
+    <rect x="50" width="74" height="20" fill="#2ca02c"/>
+    <rect width="124" height="20" fill="url(#g)"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+    <text x="25.0" y="14">Terms</text>
+    <text x="87.0" y="14">of Access</text>
+  </g>
+</svg>
