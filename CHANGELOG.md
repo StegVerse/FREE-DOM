@@ -1,3 +1,30 @@
+## v1.2.0 — 2025-10-20
+**Commit:** `a70562e` — Add files via upload  
+**Author:** StegVerse  **Branch:** `main`  **Workflow:** `Merge Pending, Build Checklist & Changelog, Validate` (run 18671667556)
+
+<details><summary>Changed files</summary>
+
+```txt
+scripts/tv_fetch.py
+```
+</details>
+
+| Dataset | Count |
+|---|---:|
+| master_timeline.csv | 1165 |
+| verified_people_events.csv | 2 |
+| unverified_events.csv | 1 |
+| unverified_people.csv | 1 |
+| unverified_connections.csv | 1 |
+
+| Pending Batches | Count |
+|---|---:|
+| data/pending/events | 0 |
+| data/pending/people | 0 |
+| data/pending/unverified | 0 |
+
+---
+
 # 🧾 FREE-DOM — CHANGELOG
 
 All notable changes are recorded by the `Auto Update` workflow.
