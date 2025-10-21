@@ -1,0 +1,3 @@
+# Add this step to .github/workflows/auto_update.yml after 'Build Version Badge'
+  - name: 🧭 Build Freshness Badge
+    run: python scripts/make_freshness_badge.py
