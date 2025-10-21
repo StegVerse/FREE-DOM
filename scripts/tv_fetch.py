@@ -1,79 +1,49 @@
 #!/usr/bin/env python3
 """
-tv_fetch.py — Thin client to fetch short‑lived, scoped secrets from StegVerse/TV
-without storing any long‑lived credentials in the platform (GitHub Actions).
-
-Design:
-- In CI (GitHub Actions), obtain an OIDC ID token (requires `permissions: id-token: write`).
-- Exchange that ID token at the TV endpoint for a short‑lived access token scoped to a role.
-- Fetch only the requested keys as JSON and write them to a file (default: /tmp/tv.json).
-- Never print secret values to logs; only write to the output file.
-- Supports local dev via `--profile dev` which reads a short‑lived token from
-  ~/.config/stegverse-tv/dev.json (issued by your TV CLI).
-
-NOTE: Replace the placeholder TV endpoints with your actual Token Vault URLs.
+Thin client to fetch short-lived, scoped secrets from StegVerse/TV via OIDC.
+- CI: use GitHub OIDC (requires permissions: id-token: write)
+- Local: use --profile to read a short-lived token from ~/.config/stegverse-tv/<profile>.json
 """
-from __future__ import annotations
 import argparse, json, os, sys, time
 from pathlib import Path
-from typing import Dict, Any, List
 
 try:
-    import requests  # type: ignore
+    import requests
 except Exception:
-    requests = None  # If missing, add a 'pip install requests' step in your workflow.
+    requests = None
 
 DEFAULT_OUT = "/tmp/tv.json"
 
-def log(msg: str) -> None:
-    # Non-secret logging
+def log(msg):
     print(f"[tv_fetch] {msg}", flush=True)
 
-def get_github_oidc_jwt(audience: str) -> str:
-    """
-    Uses GitHub's OIDC env vars to obtain a signed ID token for the job.
-    Requires: permissions.id-token: write in the workflow.
-    """
+def get_github_oidc_jwt(audience):
     url = os.environ.get("ACTIONS_ID_TOKEN_REQUEST_URL")
-    token = os.environ.get("ACTIONS_ID_TOKEN_REQUEST_TOKEN")
-    if not url or not token:
-        raise RuntimeError("Missing GitHub OIDC request env vars. Ensure `permissions: id-token: write`.")
-    if "?" in url:
-        url = f"{url}&audience={audience}"
-    else:
-        url = f"{url}?audience={audience}"
-    import urllib.request
-    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}"})
+    tok = os.environ.get("ACTIONS_ID_TOKEN_REQUEST_TOKEN")
+    if not url or not tok:
+        raise RuntimeError("Missing GitHub OIDC request env vars. Ensure permissions: id-token: write.")
+    url = f"{url}{'&' if '?' in url else '?'}audience={audience}"
+    import urllib.request, json as _json
+    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {tok}"})
     with urllib.request.urlopen(req, timeout=15) as resp:
-        data = json.load(resp)
-    id_token = data.get("value")
-    if not id_token:
+        data = _json.load(resp)
+    if "value" not in data:
         raise RuntimeError("Failed to obtain OIDC ID token from GitHub.")
-    return id_token
+    return data["value"]
 
-def exchange_oidc_for_tv_token(tv_base_url: str, id_token: str, role: str) -> str:
-    """
-    Exchange the GitHub OIDC token for a short‑lived TV token scoped to `role`.
-    TV must be configured to trust your repo/workflow via OIDC.
-    """
+def exchange_oidc_for_tv_token(tv_base_url, id_token, role):
     if requests is None:
-        raise RuntimeError("The `requests` library is required. Add a `pip install requests` step.")
+        raise RuntimeError("requests is required. Add 'pip install requests' in your workflow.")
     url = tv_base_url.rstrip("/") + "/oidc/exchange"
-    payload = {"id_token": id_token, "role": role}
-    r = requests.post(url, json=payload, timeout=20)
+    r = requests.post(url, json={"id_token": id_token, "role": role}, timeout=20)
     if r.status_code != 200:
         raise RuntimeError(f"TV OIDC exchange failed: {r.status_code} {r.text}")
     data = r.json()
-    tv_token = data.get("access_token")
-    if not tv_token:
+    if "access_token" not in data:
         raise RuntimeError("TV did not return access_token")
-    return tv_token
+    return data["access_token"]
 
-def get_tv_token_from_profile(profile: str) -> str:
-    """
-    Local dev path: read a short‑lived token issued by TV CLI.
-    File: ~/.config/stegverse-tv/{profile}.json  with {"access_token": "...", "exp": 1234567890}
-    """
+def get_tv_token_from_profile(profile):
     cfg = Path.home() / ".config" / "stegverse-tv" / f"{profile}.json"
     if not cfg.exists():
         raise RuntimeError(f"TV profile not found: {cfg}")
@@ -86,37 +56,30 @@ def get_tv_token_from_profile(profile: str) -> str:
         raise RuntimeError("TV dev token expired. Renew via TV CLI.")
     return tok
 
-def fetch_keys(tv_base_url: str, tv_token: str, keys: List[str]) -> Dict[str, Any]:
-    """
-    Fetch a list of keys from TV's KV API.
-    Endpoint is a placeholder; adjust to your TV deployment.
-    """
+def fetch_keys(tv_base_url, tv_token, keys):
     if requests is None:
-        raise RuntimeError("The `requests` library is required. Add a `pip install requests` step.")
+        raise RuntimeError("requests is required. Add 'pip install requests' in your workflow.")
     url = tv_base_url.rstrip("/") + "/kv/get"
-    r = requests.post(url, headers={"Authorization": f"Bearer {tv_token}"},
-                      json={"keys": keys}, timeout=20)
+    r = requests.post(url, headers={"Authorization": f"Bearer {tv_token}"}, json={"keys": keys}, timeout=20)
     if r.status_code != 200:
         raise RuntimeError(f"TV KV get failed: {r.status_code} {r.text}")
-    out = r.json() or {}
-    # Avoid printing values; just return them.
-    return out
+    return r.json() or {}
 
 def main():
-    p = argparse.ArgumentParser(description="Fetch short‑lived secrets from StegVerse/TV.")
-    p.add_argument("--tv-url", required=True, help="Base URL for Token Vault (e.g., https://tv.stegverse.internal)")
-    p.add_argument("--role", required=True, help="TV role to assume (e.g., free-dom/ci/auto-update)")
-    p.add_argument("--aud", default="stegverse-tv", help="OIDC audience expected by TV (default: stegverse-tv)")
-    p.add_argument("--keys", required=True, help="Comma-separated list of keys to fetch")
-    p.add_argument("--out", default=DEFAULT_OUT, help=f"Output JSON path (default: {DEFAULT_OUT})")
-    p.add_argument("--profile", help="Local dev profile (reads ~/.config/stegverse-tv/<profile>.json)")
-    args = p.parse_args()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--tv-url", required=True)
+    ap.add_argument("--role", required=True)
+    ap.add_argument("--aud", default="stegverse-tv")
+    ap.add_argument("--keys", required=True, help="Comma-separated list of keys to fetch")
+    ap.add_argument("--out", default=DEFAULT_OUT)
+    ap.add_argument("--profile")
+    args = ap.parse_args()
 
     keys = [k.strip() for k in args.keys.split(",") if k.strip()]
     if not keys:
-        raise SystemExit("No keys requested. Use --keys key1,key2")
+        print("No keys requested. Use --keys key1,key2", file=sys.stderr)
+        sys.exit(2)
 
-    # Determine auth path
     if args.profile:
         log(f"Using TV dev profile '{args.profile}'")
         tv_token = get_tv_token_from_profile(args.profile)
@@ -128,10 +91,8 @@ def main():
 
     log("Fetching requested keys (values will not be printed)…")
     values = fetch_keys(args.tv_url, tv_token, keys)
-
-    out_path = Path(args.out)
-    out_path.write_text(json.dumps(values), encoding="utf-8")
-    log(f"Wrote secrets JSON to {out_path}")
+    Path(args.out).write_text(json.dumps(values), encoding="utf-8")
+    log(f"Wrote secrets JSON to {args.out}")
 
 if __name__ == "__main__":
     try:
