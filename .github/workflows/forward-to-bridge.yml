@@ -1,0 +1,20 @@
+# .github/workflows/forward-to-bridge.yml
+name: Forward PR to StegVerse AI Bridge
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  forward:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call repository_dispatch on bridge
+        env:
+          GH_TOKEN: ${{ secrets.GH_STEGVERSE_AI_TOKEN }}
+        run: |
+          echo "${GH_TOKEN}" | gh auth login --with-token
+          gh api repos/StegVerse/hybrid-collab-bridge/dispatches \
+            -X POST \
+            -F event_type="stegverse-ai-review" \
+            -F client_payload="{\"target_repo\":\"${GITHUB_REPOSITORY}\",\"pr_number\":${{ github.event.pull_request.number }}}"
