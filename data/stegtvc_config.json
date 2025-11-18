@@ -1,0 +1,12 @@
+{
+  "providers": [
+    {
+      "use_case": "connectivity-check",
+      "module": "hybrid-collab-bridge",
+      "provider": "openai",
+      "model": "gpt-4o-mini",
+      "temperature": 0.0,
+      "max_tokens": 512
+    }
+  ]
+}
